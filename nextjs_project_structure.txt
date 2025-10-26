@@ -1,0 +1,139 @@
+# Estructura del Proyecto: Sistema de Gestión de Notas
+
+```
+grades-management-system/
+├── .env.local                          # Variables de entorno (NO subir a Git)
+├── .env.example                        # Ejemplo de variables de entorno
+├── .gitignore
+├── next.config.js
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+├── tsconfig.json (opcional)
+│
+├── public/
+│   ├── favicon.ico
+│   └── logo.png
+│
+├── src/
+│   ├── app/
+│   │   ├── layout.js                  # Layout principal
+│   │   ├── page.js                    # Página de inicio (Login)
+│   │   ├── globals.css                # Estilos globales
+│   │   │
+│   │   ├── api/
+│   │   │   ├── auth/
+│   │   │   │   └── [...nextauth]/
+│   │   │   │       └── route.js       # NextAuth configuración
+│   │   │   │
+│   │   │   ├── sheets/
+│   │   │   │   ├── read/
+│   │   │   │   │   └── route.js       # Leer datos de Google Sheets
+│   │   │   │   ├── write/
+│   │   │   │   │   └── route.js       # Escribir datos a Google Sheets
+│   │   │   │   └── courses/
+│   │   │   │       └── route.js       # Obtener lista de cursos
+│   │   │   │
+│   │   │   └── grades/
+│   │   │       ├── route.js           # CRUD de notas
+│   │   │       └── calculate/
+│   │   │           └── route.js       # Calcular NT automático
+│   │   │
+│   │   ├── dashboard/
+│   │   │   ├── page.js                # Dashboard principal
+│   │   │   └── loading.js             # Estado de carga
+│   │   │
+│   │   └── grades/
+│   │       └── [courseId]/
+│   │           └── [subjectId]/
+│   │               └── page.js        # Página de carga de notas
+│   │
+│   ├── components/
+│   │   ├── auth/
+│   │   │   ├── LoginButton.jsx        # Botón de login con Google
+│   │   │   └── LogoutButton.jsx       # Botón de logout
+│   │   │
+│   │   ├── dashboard/
+│   │   │   ├── CourseSelector.jsx     # Selector de cursos
+│   │   │   └── SubjectSelector.jsx    # Selector de materias
+│   │   │
+│   │   ├── grades/
+│   │   │   ├── GradesTable.jsx        # Tabla principal de notas
+│   │   │   ├── GradeInput.jsx         # Input individual de nota
+│   │   │   ├── TrimesterSelector.jsx  # Selector de trimestres
+│   │   │   ├── ColumnManager.jsx      # Gestor de columnas (N1, N2, etc)
+│   │   │   └── SaveButton.jsx         # Botón de guardar con loading
+│   │   │
+│   │   ├── ui/
+│   │   │   ├── Button.jsx             # Botón reutilizable
+│   │   │   ├── Card.jsx               # Card component
+│   │   │   ├── Input.jsx              # Input reutilizable
+│   │   │   ├── Modal.jsx              # Modal component
+│   │   │   └── Loader.jsx             # Spinner de carga
+│   │   │
+│   │   └── layout/
+│   │       ├── Header.jsx             # Header con navegación
+│   │       ├── Sidebar.jsx            # Sidebar (futuro)
+│   │       └── Footer.jsx             # Footer
+│   │
+│   ├── lib/
+│   │   ├── auth.js                    # Configuración de NextAuth
+│   │   ├── googleSheets.js            # Cliente de Google Sheets API
+│   │   ├── sheetsParser.js            # Parser de datos de Sheets
+│   │   └── utils.js                   # Utilidades generales
+│   │
+│   ├── hooks/
+│   │   ├── useGrades.js               # Hook para manejar notas
+│   │   ├── useSheet.js                # Hook para Google Sheets
+│   │   └── useAuth.js                 # Hook para autenticación
+│   │
+│   ├── context/
+│   │   └── GradesContext.js           # Context API para estado global
+│   │
+│   └── utils/
+│       ├── constants.js               # Constantes del proyecto
+│       ├── validators.js              # Validaciones de datos
+│       └── calculations.js            # Cálculos de notas
+│
+└── credentials/
+    └── google-credentials.json        # Credenciales de Google (NO subir a Git)
+```
+
+## Archivos Principales a Crear
+
+### 1. package.json
+### 2. .env.local (variables de entorno)
+### 3. next.config.js
+### 4. tailwind.config.js
+### 5. Componentes principales
+### 6. API Routes
+### 7. Configuración de Google Sheets
+
+## Dependencias NPM Necesarias
+
+```json
+{
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "next-auth": "^4.24.0",
+    "googleapis": "^128.0.0",
+    "lucide-react": "^0.294.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}
+```
+
+## Notas Importantes
+
+- **credentials/** NO debe subirse a Git
+- **.env.local** debe estar en .gitignore
+- Usar App Router de Next.js 13+ (no Pages Router)
+- Tailwind CSS para estilos
+- NextAuth para autenticación con Google
+- googleapis para conexión con Google Sheets
